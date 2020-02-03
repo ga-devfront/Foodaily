@@ -91,3 +91,7 @@ header {
     background-color: #ffffff;
     border: none;
 }
+
+h6 {
+    font-size: 0.9em;
+}
