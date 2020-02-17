@@ -19,31 +19,23 @@
       <a id="connection">
         Se connecter
       </a>
-      <a id="subscribe">
+      <a id="subscribe" class="bold">
         S'inscrire
       </a>
     </nav>
   </header>
 
   <main class="container center column">
-    <div class="container center" id="search">
-      <div class="col-md-5 align-self-center">
-        <div class="row justify-content-center mb-5">
-          <p class="xbold text-white h2 text-center">Trouver le restaurant qui vous correspond</p>
-        </div>
-        <div class="row justify-content-center">
-          <div class="input-group shadow">
-            <div class="input-group-prepend">
-              <span class="input-group-text pl-3" id="searchImg"><img src="img/localisation.png"></span>
-            </div>
-            <input id="searchTxt" type="text" class="form-control" placeholder="Ville, adresse, restaurant, etc...">
-            <div class="input-group-append">
-              <button class="btn btn-primary xbold px-4" id="searchBtn" type="button">Rechercher</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <section class="container verticalCenter column center" id="search">
+      <p class="big white bold spaceBottom">Trouver le restaurant qui vous correspond</p>
+
+      <form class="shadowBar container verticalCenter">
+        <label for="searchInput"><img src="img/localisation.png"></label>
+        <input id="searchInput" type="text" placeholder="Ville, adresse, restaurant, etc...">
+        <input id="searchBtn" class="white bold" type="button" value="Rechercher"></button>
+      </form>
+    </section>
+
     <div class="col-md-10 col-xs-12">
       <div class="row justify-content-around my-5">
         <div class="col-md-2 col-xs-12">
