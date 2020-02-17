@@ -15,37 +15,48 @@
 </head>
 
 <body class="container-fluid">
-  <header class="row justify-content-center">
-      <div class="col-md-2 align-self-center"><a href="/foodaily"><img src="img/logo.png" alt="logo Foodaily"></a></div>
-      <nav class="col-md-3 offset-md-6 align-self-center" id="menu">
-
-        <button type="button" class="btn btn-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Se connecter
-        </button>
-        <div class="dropdown-menu">
-          <form class="px-4 py-3">
-            <div class="form-group">
-              <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
-            </div>
-            <div class="form-group">
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                <label class="form-check-label" for="dropdownCheck">
-                  Se souvenir de moi
-                </label>
+  <header class="row">
+    <nav class="navbar navbar-expand-md navbar-light"
+      style="background-color: #ffffff">
+      <a href="/foodaily" class="navbar-brand"><img src="img/logo.png" alt="logo Foodaily"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
+        aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><button type="button" class="btn btn-link" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+            Se connecter
+          </button>
+          <div class="dropdown-menu">
+            <form class="px-4 py-3">
+              <div class="form-group">
+                <input type="email" class="form-control" id="connectMail" placeholder="email@example.com">
               </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Se connecter</button>
-          </form>
+              <div class="form-group">
+                <input type="password" class="form-control" id="connectPassword" placeholder="Password">
+              </div>
+              <div class="form-group">
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="remindMe">
+                  <label class="form-check-label" for="remindMe">
+                    Se souvenir de moi
+                  </label>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Se connecter</button>
+            </form>
+          </div></li>
+
+          <li class="nav-item"><button type="button" class="btn btn-danger">
+            S'inscrire
+          </button></li>
+        </ul>
         </div>
 
-        <button type="button" class="btn btn-danger">
-          S'inscrire
-        </button>
-      </nav>
+    </nav>
+
   </header>
   <main class="row justify-content-center">
     <div class="row justify-content-center" id="search">
@@ -67,21 +78,24 @@
       </div>
     </div>
     <div class="col-md-10 col-xs-12">
-    <div class="row justify-content-around my-5">
-      <div class="col-md-2 col-xs-12">
-        <img src="img/decouvrir.png" class="img-fluid mx-auto d-block" alt="Decouvrir">
-        <p class="text-center mt-2">Decouvrez de nouveaux restaurants allant de la cuisine asiatique à la gastronomie française en passant par la streetfood amériquaine.</p>
-      </div>
-      <div class="col-md-2 col-xs-12">
-        <img src="img/reserver.png" class="img-fluid mx-auto d-block" alt="Decouvrir">
-        <p class="text-center mt-2">Réservez votre table en ligne dans des restaurants du monde entier et profitez d’offres esclusives à Foodaily.</p>
-      </div>
-      <div class="col-md-2 col-xs-12">
-        <img src="img/noter.png" class="img-fluid mx-auto d-block" alt="Decouvrir">
-        <p class="text-center mt-2">Donnez votre avis et notez votre repas afin d’aider les autres utilisateurs à ce faire un avis sur le restaurant avant même d’y être aller.</p>
+      <div class="row justify-content-around my-5">
+        <div class="col-md-2 col-xs-12">
+          <img src="img/decouvrir.png" class="img-fluid mx-auto d-block" alt="Decouvrir">
+          <p class="text-center mt-2">Decouvrez de nouveaux restaurants allant de la cuisine asiatique à la gastronomie
+            française en passant par la streetfood amériquaine.</p>
+        </div>
+        <div class="col-md-2 col-xs-12">
+          <img src="img/reserver.png" class="img-fluid mx-auto d-block" alt="Decouvrir">
+          <p class="text-center mt-2">Réservez votre table en ligne dans des restaurants du monde entier et profitez
+            d’offres esclusives à Foodaily.</p>
+        </div>
+        <div class="col-md-2 col-xs-12">
+          <img src="img/noter.png" class="img-fluid mx-auto d-block" alt="Decouvrir">
+          <p class="text-center mt-2">Donnez votre avis et notez votre repas afin d’aider les autres utilisateurs à ce
+            faire un avis sur le restaurant avant même d’y être aller.</p>
+        </div>
       </div>
     </div>
-  </div>
   </main>
   <footer class="row">
     <div class="col-md-12">
@@ -94,8 +108,11 @@
               <li>Inscription</li>
               <li>Conditions générales</li>
             </ul>
-        </nav></div>
-        <div class="col-md-4"><p class="h5 text-uppercase">Suivez-nous</p></div>
+          </nav>
+        </div>
+        <div class="col-md-4">
+          <p class="h5 text-uppercase">Suivez-nous</p>
+        </div>
       </div>
     </div>
   </footer>
