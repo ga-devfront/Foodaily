@@ -1,3 +1,5 @@
+/* eslint-disable no-new */
+
 class Site {
   constructor(container) {
     this.parent = container;
@@ -63,6 +65,10 @@ class Site {
     $(subscribe).text('S\'inscrire');
     $(subscribe).attr('id', 'subscribe');
     $(subscribe).addClass('bold');
+  }
+
+  searchBar() {
+    
   }
 }
 

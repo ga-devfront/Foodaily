@@ -1,1 +1,16 @@
-module.exports = { "extends": "airbnb-base" };
+{
+    "env": {
+      "browser": true,
+      "es6": true,
+      "jquery": true
+    },
+    "extends": [
+      "airbnb-base"
+    ],
+    "rules": {
+      "import/extensions": ["error", "always", {
+        "ignorePackages": true
+      }],
+      "class-methods-use-this": 0
+    }
+  }
