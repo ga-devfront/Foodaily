@@ -94,6 +94,8 @@ form label {
     height: 100%;
     border: 0px;
     border-radius: 0 20px 20px 0;
+    -webkit-transition: ease 0.5s;
+    transition: ease 0.5s;
 }
 
 #searchBtn:hover {
@@ -134,7 +136,11 @@ form label {
 }
 
 .spaceBottom {
-    padding-bottom: 40px;
+    margin-bottom: 40px;
+}
+
+.spaceTop {
+    margin-top: 40px;
 }
 
 .shadowBar {
@@ -156,3 +162,40 @@ form label {
 .bold {
     font-weight: 700;
 }
+
+.card {
+    width: 175px;
+    text-align: center;
+    margin: 0px 100px 0px 100px;
+}
+
+.circle {
+    height: 175px;
+    width: 175px;
+    background-color: #0067c0;
+    -webkit-clip-path: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+}
+
+.circle p {
+    padding-top: 40px;
+    margin-bottom: 0;
+    color: #ffffff;
+    font-size: 1.8em;
+    text-align: center;
+}
+
+.circle img {
+    -webkit-transition: 1s ease;
+    transition: 1s ease;
+}
+
+.circle:hover img {
+    -webkit-transform: scale(0.8) translateY(15px);
+    transform: scale(0.8) translateY(15px);
+}
+
+
+/* media queries */
+
+@media screen and (max-width: 650px) {}
