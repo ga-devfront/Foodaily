@@ -8,122 +8,60 @@
   <meta name="theme-color" content="#0068c1">
   <title>Foodaily</title>
   <link href="css/normalize.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="css/style.css" rel="stylesheet" />
   <link rel="icon" type="image/png" href="img/favicon.png" />
 </head>
 
-<body class="container-fluid">
-  <header class="row">
-    <nav class="navbar navbar-expand-md navbar-light"
-      style="background-color: #ffffff">
-      <a href="/foodaily" class="navbar-brand"><img src="img/logo.png" alt="logo Foodaily"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
-        aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-        <div class="collapse navbar-collapse" id="navbar">
-          <ul class="navbar-nav mr-auto">
-          <li class="nav-item"><button type="button" class="btn btn-link" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
-            Se connecter
-          </button>
-          <div class="dropdown-menu">
-            <form class="px-4 py-3">
-              <div class="form-group">
-                <input type="email" class="form-control" id="connectMail" placeholder="email@example.com">
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" id="connectPassword" placeholder="Password">
-              </div>
-              <div class="form-group">
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="remindMe">
-                  <label class="form-check-label" for="remindMe">
-                    Se souvenir de moi
-                  </label>
-                </div>
-              </div>
-              <button type="submit" class="btn btn-primary">Se connecter</button>
-            </form>
-          </div></li>
-
-          <li class="nav-item"><button type="button" class="btn btn-danger">
-            S'inscrire
-          </button></li>
-        </ul>
-        </div>
-
+<body class="container column">
+  <header class="container around verticalCenter">
+    <a href="/foodaily"><img src="img/logo.png" alt="logo Foodaily"></a>
+    <nav>
+      <a id="connection">
+        Se connecter
+      </a>
+      <a id="subscribe" class="bold">
+        S'inscrire
+      </a>
     </nav>
-
   </header>
-  <main class="row justify-content-center">
-    <div class="row justify-content-center" id="search">
-      <div class="col-md-5 align-self-center">
-        <div class="row justify-content-center mb-5">
-          <p class="xbold text-white h2 text-center">Trouver le restaurant qui vous correspond</p>
-        </div>
-        <div class="row justify-content-center">
-          <div class="input-group shadow">
-            <div class="input-group-prepend">
-              <span class="input-group-text pl-3" id="searchImg"><img src="img/localisation.png"></span>
-            </div>
-            <input id="searchTxt" type="text" class="form-control" placeholder="Ville, adresse, restaurant, etc...">
-            <div class="input-group-append">
-              <button class="btn btn-primary xbold px-4" id="searchBtn" type="button">Rechercher</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-10 col-xs-12">
-      <div class="row justify-content-around my-5">
-        <div class="col-md-2 col-xs-12">
-          <img src="img/decouvrir.png" class="img-fluid mx-auto d-block" alt="Decouvrir">
-          <p class="text-center mt-2">Decouvrez de nouveaux restaurants allant de la cuisine asiatique à la gastronomie
-            française en passant par la streetfood amériquaine.</p>
-        </div>
-        <div class="col-md-2 col-xs-12">
-          <img src="img/reserver.png" class="img-fluid mx-auto d-block" alt="Decouvrir">
-          <p class="text-center mt-2">Réservez votre table en ligne dans des restaurants du monde entier et profitez
-            d’offres esclusives à Foodaily.</p>
-        </div>
-        <div class="col-md-2 col-xs-12">
-          <img src="img/noter.png" class="img-fluid mx-auto d-block" alt="Decouvrir">
-          <p class="text-center mt-2">Donnez votre avis et notez votre repas afin d’aider les autres utilisateurs à ce
-            faire un avis sur le restaurant avant même d’y être aller.</p>
-        </div>
-      </div>
-    </div>
+
+  <main class="container center column spaceBottom">
+    <section class="container verticalCenter column center" id="search">
+      <p class="big white bold spaceBottom">Trouver le restaurant qui vous correspond</p>
+
+      <form class="shadowBar container verticalCenter">
+        <label for="searchInput"><img src="img/localisation.png"></label>
+        <input id="searchInput" type="text" placeholder="Ville, adresse, restaurant, etc...">
+        <input id="searchBtn" class="white bold" type="button" value="Rechercher"></button>
+      </form>
+    </section>
+
+    <section class="container center spaceTop">
+      <article class="card">
+        <aside class="circle"><p>Decouvrir</p><img src="img/decouvrir.png"></aside>
+        <p>Decouvrez de nouveaux restaurants allant de la cuisine asiatique à la gastronomie française en passant par la streetfood amériquaine. </p>
+      </article>
+      <article class="card">
+        <aside class="circle"><p>Reserver</p><img src="img/reserver.png"></aside>
+        <p>Réservez votre table en ligne dans des restaurants du monde entier et profitez d’offres esclusives à Foodaily !</p>
+      </article>
+      <article class="card">
+        <aside class="circle"><p>Noter</p><img src="img/noter.png"></aside>
+        <p>Donnez votre avis et notez votre repas afin d’aider les autres utilisateurs à ce faire un avis sur le restaurant avant même d’y être aller !</p>
+      </article>
+    </section>
   </main>
-  <footer class="row">
-    <div class="col-md-12">
-      <div class="row">
-        <div class="col-md-4">
-          <nav class="nav flex-column">
-            <p class="font-weight-bold text-uppercase">Plan du site</p>
-            <ul>
-              <li>Recherche</li>
-              <li>Inscription</li>
-              <li>Conditions générales</li>
-            </ul>
-          </nav>
-        </div>
-        <div class="col-md-4">
-          <p class="h5 text-uppercase">Suivez-nous</p>
-        </div>
-      </div>
-    </div>
+  <footer class="container column verticalCenter">
+    <p>Suivez-Nous</p>
+    <nav class="container center">
+    <div class="social container center verticalCenter"><a href=""><img src="img/social/twitter.png" alt="Twitter"></a></div>
+    <div class="social container center verticalCenter"><a href=""><img src="img/social/fb.png" alt="Facebook"></a></div>
+      <div class="social container center verticalCenter"><a href=""><img src="img/social/github.png" alt="GitHub"></a></div>
+        <div class="social container center verticalCenter"><a href=""><img src="img/social/insta.png" alt="Instagram"></a></div>
+      </nav>
   </footer>
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-  </script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-  </script>
   <script src="js/main.js" type="module"></script>
 </body>
 
