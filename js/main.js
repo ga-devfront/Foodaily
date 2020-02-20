@@ -46,11 +46,11 @@ class Site {
 
   step0() {
     if ($('#logo').val() === undefined) {
-      this.createLogo()
-    };
+      this.createLogo();
+    }
     if ($('#connection').val() === undefined && $('#subscribe').val() === undefined) {
       this.createMenu();
-    };
+    }
     this.createSearch();
     this.creatInto();
     this.creatFooter();
@@ -61,7 +61,7 @@ class Site {
       parent: $('header'),
       element: 'a',
       attr: {
-        href: '/foodaily'
+        href: '/foodaily',
       },
       class: [],
     });
@@ -109,38 +109,38 @@ class Site {
       parent: $('main'),
       element: 'section',
       attr: {
-        id: 'search'
+        id: 'search',
       },
-      class: ['container', 'verticalCenter', 'column', 'center']
+      class: ['container', 'verticalCenter', 'column', 'center'],
     });
     this.newHtml({
       parent: $('#search'),
       element: 'p',
       attr: {},
-      class: ['big', 'white', 'bold', 'spaceBottom']
+      class: ['big', 'white', 'bold', 'spaceBottom'],
     });
     $('#search p').text('Trouver le restaurant qui vous correspond');
     this.newHtml({
       parent: $('#search'),
       element: 'form',
       attr: {},
-      class: ['shadowBar', 'container', 'verticalCenter']
+      class: ['shadowBar', 'container', 'verticalCenter'],
     });
     this.newHtml({
       parent: $('#search form'),
       element: 'label',
       attr: {
-        for: 'searchInput'
+        for: 'searchInput',
       },
-      class: []
+      class: [],
     });
     this.newHtml({
       parent: $('#search form label'),
       element: 'img',
       attr: {
-        src: 'img/localisation.png'
+        src: 'img/localisation.png',
       },
-      class: []
+      class: [],
     });
     this.newHtml({
       parent: $('#search form'),
@@ -148,9 +148,9 @@ class Site {
       attr: {
         id: 'searchInput',
         type: 'text',
-        placeholder: 'Ville, adresse, restaurant, etc...'
+        placeholder: 'Ville, adresse, restaurant, etc...',
       },
-      class: []
+      class: [],
     });
     this.newHtml({
       parent: $('#search form'),
@@ -158,9 +158,9 @@ class Site {
       attr: {
         id: 'searchBtn',
         type: 'button',
-        value: 'Rechercher'
+        value: 'Rechercher',
       },
-      class: ['white', 'bold']
+      class: ['white', 'bold'],
     });
   }
 
@@ -169,36 +169,36 @@ class Site {
       parent: $(settings.parent),
       element: 'article',
       attr: {
-        id: settings.id
+        id: settings.id,
       },
-      class: ['card']
+      class: ['card'],
     });
     this.newHtml({
       parent: $(`#${settings.id}`),
       element: 'aside',
       attr: {},
-      class: ['circle']
+      class: ['circle'],
     });
     this.newHtml({
       parent: $(`#${settings.id} aside`),
       element: 'p',
       attr: {},
-      class: []
+      class: [],
     });
     $(`#${settings.id} aside p`).text(settings.title);
     this.newHtml({
       parent: $(`#${settings.id} aside`),
       element: 'img',
       attr: {
-        src: settings.img
+        src: settings.img,
       },
-      class: []
+      class: [],
     });
     this.newHtml({
       parent: $(`#${settings.id}`),
       element: 'p',
       attr: {},
-      class: []
+      class: [],
     });
     $(`#${settings.id}>p`).text(settings.txt);
   }
@@ -208,30 +208,30 @@ class Site {
       parent: $('main'),
       element: 'section',
       attr: {
-        id: 'intro'
+        id: 'intro',
       },
-      class: ['container', 'center', 'spaceTop']
+      class: ['container', 'center', 'spaceTop'],
     });
     this.creatCard({
       parent: $('#intro'),
       id: 'decouvrir',
       title: 'Decouvrir',
       img: 'img/decouvrir.png',
-      txt: 'Decouvrez de nouveaux restaurants allant de la cuisine asiatique à la gastronomie française en passant par la streetfood amériquaine.'
+      txt: 'Decouvrez de nouveaux restaurants allant de la cuisine asiatique à la gastronomie française en passant par la streetfood amériquaine.',
     });
     this.creatCard({
       parent: $('#intro'),
       id: 'reserver',
       title: 'Reserver',
       img: 'img/reserver.png',
-      txt: 'Réservez votre table en ligne dans des restaurants du monde entier et profitez d’offres esclusives à Foodaily !'
+      txt: 'Réservez votre table en ligne dans des restaurants du monde entier et profitez d’offres esclusives à Foodaily !',
     });
     this.creatCard({
       parent: $('#intro'),
       id: 'noter',
       title: 'Noter',
       img: 'img/noter.png',
-      txt: 'Donnez votre avis et notez votre repas afin d’aider les autres utilisateurs à ce faire un avis sur le restaurant avant même d’y être aller !'
+      txt: 'Donnez votre avis et notez votre repas afin d’aider les autres utilisateurs à ce faire un avis sur le restaurant avant même d’y être aller !',
     });
   }
 
@@ -240,26 +240,26 @@ class Site {
       parent: $(settings.parent),
       element: 'div',
       attr: {
-        id: settings.social
+        id: settings.social,
       },
-      class: ['social', 'container', 'center', 'verticalCenter']
+      class: ['social', 'container', 'center', 'verticalCenter'],
     });
     this.newHtml({
       parent: $(`#${settings.social}`),
       element: 'a',
       attr: {
-        href: settings.link
+        href: settings.link,
       },
-      class: []
+      class: [],
     });
     this.newHtml({
       parent: $(`#${settings.social} a`),
       element: 'img',
       attr: {
         src: settings.img,
-        alt: settings.social
+        alt: settings.social,
       },
-      class: []
+      class: [],
     });
   }
 
@@ -268,38 +268,38 @@ class Site {
       parent: $('footer'),
       element: 'p',
       attr: {},
-      class: []
+      class: [],
     });
     $('footer p').text('Suivez-Nous');
     this.newHtml({
       parent: $('footer'),
       element: 'nav',
       attr: {},
-      class: ['container', 'center']
+      class: ['container', 'center'],
     });
     this.creatSocial({
       parent: $('footer nav'),
       social: 'facebook',
       link: 'https://www.facebook.com/agdevfront/',
-      img: 'img/social/fb.png'
+      img: 'img/social/fb.png',
     });
     this.creatSocial({
       parent: $('footer nav'),
       social: 'github',
       link: 'https://github.com/ga-devfront/Foodaily',
-      img: 'img/social/github.png'
+      img: 'img/social/github.png',
     });
     this.creatSocial({
       parent: $('footer nav'),
       social: 'instagram',
       link: 'https://www.instagram.com/agdevfront/',
-      img: 'img/social/insta.png'
+      img: 'img/social/insta.png',
     });
     this.creatSocial({
       parent: $('footer nav'),
       social: 'twitter',
       link: 'https://twitter.com/AgDevfront/',
-      img: 'img/social/twitter.png'
+      img: 'img/social/twitter.png',
     });
   }
 }
