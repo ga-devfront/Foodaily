@@ -37,7 +37,7 @@ class Site {
 
   newHtml(settings) {
     const newElement = $(`<${settings.element}>`);
-      $(newElement).attr(settings.attr);
+    $(newElement).attr(settings.attr);
     for (let x = 0; settings.class.length > x; x += 1) {
       $(newElement).addClass(settings.class[x]);
     }
@@ -45,8 +45,13 @@ class Site {
   }
 
   step0() {
-    this.createLogo();
-    this.createMenu();
+    if ($('#logo').val() === undefined) {
+      this.createLogo()
+    };
+    if ($('#connection').val() === undefined && $('#subscribe').val() === undefined) {
+      this.createMenu();
+    };
+    this.createSearch();
   }
 
   createLogo() {
@@ -74,8 +79,7 @@ class Site {
     this.newHtml({
       parent: $('header'),
       element: 'nav',
-      attr: {
-      },
+      attr: {},
       class: [],
     });
     this.newHtml({
@@ -86,7 +90,7 @@ class Site {
       },
       class: [],
     });
-this.newHtml({
+    this.newHtml({
       parent: $('header nav'),
       element: 'a',
       attr: {
@@ -96,6 +100,56 @@ this.newHtml({
     });
     $('#connection').text('Se connecter');
     $('#subscribe').text('S\'inscrire');
+  }
+  
+  createSearch() {
+    this.newHtml({
+      parent: $('main'),
+      element: 'section',
+      attr: {id : 'search'},
+      class: ['container', 'verticalCenter', 'column', 'center']
+    });
+    this.newHtml({
+      parent: $('#search'),
+      element: 'p',
+      attr: {},
+      class: ['big', 'white', 'bold', 'spaceBottom']
+    });
+    $('#search p').text('Trouver le restaurant qui vous correspond');
+    this.newHtml({
+      parent: $('#search'),
+      element: 'form',
+      attr: {},
+      class: ['shadowBar', 'container', 'verticalCenter']
+    });
+    this.newHtml({
+      parent: $('#search form'),
+      element: 'label',
+      attr: {for: 'searchInput'},
+      class: []
+    });
+    this.newHtml({
+      parent: $('#search form label'),
+      element: 'img',
+      attr: {src: 'img/localisation.png'},
+      class: []
+    });
+    this.newHtml({
+      parent: $('#search form'),
+      element: 'input',
+      attr: {id : 'searchInput',
+      type: 'text',
+      placeholder: 'Ville, adresse, restaurant, etc...'},
+      class: []
+    });
+    this.newHtml({
+      parent: $('#search form'),
+      element: 'input',
+      attr: {id : 'searchBtn',
+    type: 'button',
+  value: 'Rechercher'},
+  class: ['white', 'bold']
+    })
   }
 }
 
