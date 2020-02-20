@@ -1,5 +1,4 @@
 /* eslint-disable no-new */
-
 class Site {
   constructor(container) {
     this.parent = container;
@@ -52,6 +51,15 @@ class Site {
       this.createMenu();
     }
     this.createSearch();
+    const input = $('#searchInput')[0];
+    const options = {
+      types: ['(cities)'],
+      componentRestrictions: {
+        country: ['fr', 'ch'],
+      },
+    };
+    /* eslint-disable-next-line */
+    new google.maps.places.Autocomplete(input, options);
     this.creatInto();
     this.creatFooter();
   }
