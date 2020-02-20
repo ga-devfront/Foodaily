@@ -52,6 +52,7 @@ class Site {
       this.createMenu();
     };
     this.createSearch();
+    this.creatInto();
   }
 
   createLogo() {
@@ -149,7 +150,76 @@ class Site {
     type: 'button',
   value: 'Rechercher'},
   class: ['white', 'bold']
-    })
+    });
+  }
+
+  creatCard(settings) {
+    this.newHtml({
+      parent: $(settings.parent),
+      element: 'article',
+      attr: {id : settings.id},
+      class: ['card']
+    });
+    this.newHtml({
+      parent: $(`#${settings.id}`),
+      element: 'aside',
+      attr: {},
+      class: ['circle']
+    });
+    this.newHtml({
+      parent: $(`#${settings.id} aside`),
+      element: 'p',
+      attr: {},
+      class: []
+    });
+    $(`#${settings.id} aside p`).text(settings.title);
+    this.newHtml({
+      parent: $(`#${settings.id} aside`),
+      element: 'img',
+      attr: {src: settings.img},
+      class: []
+    });
+    this.newHtml({
+      parent: $(`#${settings.id}`),
+      element: 'p',
+      attr: {},
+      class: []
+    });
+    $(`#${settings.id}>p`).text(settings.txt);
+  }
+
+
+creatInto() {
+  this.newHtml({
+    parent: $('main'),
+    element: 'section',
+    attr: {id: 'intro'},
+    class: ['container', 'center', 'spaceTop']
+  });
+  this.creatCard({
+    parent: $('#intro'),
+    id: 'decouvrir',
+    title: 'Decouvrir',
+    img: 'img/decouvrir.png',
+    txt: 'Decouvrez de nouveaux restaurants allant de la cuisine asiatique à la gastronomie française en passant par la streetfood amériquaine.'
+  });
+  this.creatCard({
+    parent: $('#intro'),
+    id: 'reserver',
+    title: 'Reserver',
+    img: 'img/reserver.png',
+    txt: 'Réservez votre table en ligne dans des restaurants du monde entier et profitez d’offres esclusives à Foodaily !'
+  });
+  this.creatCard({
+    parent: $('#intro'),
+    id: 'noter',
+    title: 'Noter',
+    img: 'img/noter.png',
+    txt: 'Donnez votre avis et notez votre repas afin d’aider les autres utilisateurs à ce faire un avis sur le restaurant avant même d’y être aller !'
+  });}
+
+  creatFooter() {
+    
   }
 }
 
