@@ -74,6 +74,21 @@ form label {
     height: 150px;
 }
 
+#result {
+    align-self: center;
+    width: 1000px;
+}
+
+#map {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 40px;
+    border-radius: 25px;
+    height: 580px;
+    width: 400px;
+    background-color: green;
+}
+
 #connection {
     color: #0067c0;
     font-size: 1.2em;
@@ -87,7 +102,6 @@ form label {
 }
 
 #subscribe {
-    color: #ffffff;
     background-color: #bc1f00;
     font-variant: small-caps;
     font-size: 1.3em;
@@ -99,6 +113,27 @@ form label {
 
 #subscribe:hover {
     background-color: #9d1a00;
+}
+
+#retour {
+    background-color: #0067c0;
+    font-variant: small-caps;
+    font-size: 1.1em;
+    border-radius: 0.5em;
+    padding: 10px 20px 10px 20px;
+    -webkit-transition: ease 0.5s;
+    transition: ease 0.5s;
+}
+
+#retour:hover {
+    background-color: #007eea;
+    cursor: pointer;
+}
+
+#resultNumber {
+    line-height: 80%;
+    color: #222222;
+    font-style: italic;
 }
 
 #searchInput {
@@ -163,6 +198,11 @@ form label {
 .container.evenly {
     -webkit-box-pack: space-evenly;
     justify-content: space-evenly;
+}
+
+.container.between {
+    -webkit-box-pack: justify;
+            justify-content: space-between;
 }
 
 .spaceBottom {
@@ -241,6 +281,14 @@ form label {
 .social:hover img {
     -webkit-transform: scale(0.8);
     transform: scale(0.8);
+}
+
+.littleRestaurant {
+    width: 500px;
+    height: 130px;
+    background-color: green;
+    border-radius: 25px;
+    margin-bottom: 20px;
 }
 
 /* media queries */

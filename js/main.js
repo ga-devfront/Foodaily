@@ -89,7 +89,7 @@ class Site {
       attr: {
         id: 'subscribe',
       },
-      class: ['bold'],
+      class: ['bold', 'white'],
     });
     $('#connection').text('Se connecter');
     $('#subscribe').text('S\'inscrire');
@@ -294,6 +294,15 @@ class Site {
     });
   }
 
+  creatRestaurant(settings) {
+    this.newHtml({
+      parent: settings.parent,
+      element: 'element',
+      attr: {},
+      class: ['container', 'around', 'littleRestaurant'],
+    });
+  }
+
   creatResult(research) {
     this.newHtml({
       parent: $('main'),
@@ -301,7 +310,7 @@ class Site {
       attr: {
         id: 'resultName',
       },
-      class: ['container', 'verticalCenter', 'column', 'center'],
+      class: ['container', 'verticalCenter', 'column', 'center', 'spaceBottom'],
     });
     this.newHtml({
       parent: $('#resultName'),
@@ -310,6 +319,69 @@ class Site {
       class: ['big', 'white', 'bold'],
     });
     $('#resultName p').text(`Restaurants à ${research}`);
+    this.newHtml({
+      parent: $('main'),
+      element: 'article',
+      attr: {
+        id: 'result',
+      },
+      class: ['container', 'center', 'column'],
+    });
+    this.newHtml({
+      parent: $('#result'),
+      element: 'aside',
+      attr: {},
+      class: ['container', 'between', 'spaceBottom'],
+    });
+    this.newHtml({
+      parent: $('#result aside'),
+      element: 'a',
+      attr: {
+        id: 'retour',
+      },
+      class: ['bold', 'white'],
+    });
+    $('#retour').text('<< Retour');
+    $('#retour').click(() => {
+      this.state = 0;
+    });
+    this.newHtml({
+      parent: $('#result aside'),
+      element: 'p',
+      attr: {
+        id: 'resultNumber',
+      },
+      class: ['bold'],
+    });
+    $('#resultNumber').text('255 Restaurants');
+    this.newHtml({
+      parent: $('#result'),
+      element: 'section',
+      attr: {},
+      class: ['container', 'around'],
+    });
+    this.newHtml({
+      parent: $('#result section'),
+      element: 'aside',
+      attr: {
+        id: 'map',
+      },
+      class: [],
+    });
+    this.newHtml({
+      parent: $('#result section'),
+      element: 'section',
+      attr: {
+        id: 'resultList',
+      },
+      class: ['container', 'column', 'center'],
+    });
+    for (let x = 0; x < 10; x += 1) {
+      this.creatRestaurant({
+        parent: $('#resultList'),
+        name: `restaurant ${x}`,
+      });
+    }
   }
 
   fadeIn(element) {
@@ -330,26 +402,35 @@ class Site {
     if ($('#logo').val() === undefined && $('#connection').val() === undefined && $('#subscribe').val() === undefined) {
       this.createLogo();
       this.createMenu();
+      this.creatFooter();
     }
-    this.createSearch();
-    const input = $('#searchInput')[0];
-    const options = {
-      types: ['(cities)'],
-      componentRestrictions: {
-        country: ['fr', 'ch'],
-      },
-    };
-    /* eslint-disable-next-line */
-    new google.maps.places.Autocomplete(input, options);
-    $('#searchBtn').click(() => {
-      this.research = $('#searchInput').val();
-      this.state = 1;
-    });
-    this.creatIntro();
-    this.creatFooter();
-    this.fadeIn('header');
-    this.fadeIn('main');
-    this.fadeIn('footer');
+
+    let time = 0;
+    if (this.previousState === 1) {
+      time = 1000;
+    }
+    this.fadeOut('main');
+    window.setTimeout(() => {
+      $('main').empty();
+      this.createSearch();
+      const input = $('#searchInput')[0];
+      const options = {
+        types: ['(cities)'],
+        componentRestrictions: {
+          country: ['fr', 'ch'],
+        },
+      };
+      /* eslint-disable-next-line */
+      new google.maps.places.Autocomplete(input, options);
+      $('#searchBtn').click(() => {
+        this.research = $('#searchInput').val();
+        this.state = 1;
+      });
+      this.creatIntro();
+      this.fadeIn('header');
+      this.fadeIn('main');
+      this.fadeIn('footer');
+    }, time);
   }
 
   step1(research) {
