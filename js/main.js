@@ -4,6 +4,7 @@ class Site {
     this.parent = container;
     this.state = 0;
     this.previousState = 0;
+    this.research = '';
   }
 
   set state(state) {
@@ -29,6 +30,9 @@ class Site {
       case 0:
         this.step0();
         break;
+      case 1:
+        this.step1(this.research);
+        break;
       default:
         this.step0();
     }
@@ -41,27 +45,6 @@ class Site {
       $(newElement).addClass(settings.class[x]);
     }
     $(settings.parent).append(newElement);
-  }
-
-  step0() {
-    if ($('#logo').val() === undefined) {
-      this.createLogo();
-    }
-    if ($('#connection').val() === undefined && $('#subscribe').val() === undefined) {
-      this.createMenu();
-    }
-    this.createSearch();
-    const input = $('#searchInput')[0];
-    const options = {
-      types: ['(cities)'],
-      componentRestrictions: {
-        country: ['fr', 'ch'],
-      },
-    };
-    /* eslint-disable-next-line */
-    new google.maps.places.Autocomplete(input, options);
-    this.creatInto();
-    this.creatFooter();
   }
 
   createLogo() {
@@ -211,7 +194,7 @@ class Site {
     $(`#${settings.id}>p`).text(settings.txt);
   }
 
-  creatInto() {
+  creatIntro() {
     this.newHtml({
       parent: $('main'),
       element: 'section',
@@ -309,6 +292,73 @@ class Site {
       link: 'https://twitter.com/AgDevfront/',
       img: 'img/social/twitter.png',
     });
+  }
+
+  creatResult(research) {
+    this.newHtml({
+      parent: $('main'),
+      element: 'aside',
+      attr: {
+        id: 'resultName',
+      },
+      class: ['container', 'verticalCenter', 'column', 'center'],
+    });
+    this.newHtml({
+      parent: $('#resultName'),
+      element: 'p',
+      attr: {},
+      class: ['big', 'white', 'bold'],
+    });
+    $('#resultName p').text(`Restaurants à ${research}`);
+  }
+
+  fadeIn(element) {
+    $(element).css({
+      opacity: '100',
+      bottom: '0',
+    });
+  }
+
+  fadeOut(element) {
+    $(element).css({
+      opacity: '0',
+      bottom: '-40px',
+    });
+  }
+
+  step0() {
+    if ($('#logo').val() === undefined && $('#connection').val() === undefined && $('#subscribe').val() === undefined) {
+      this.createLogo();
+      this.createMenu();
+    }
+    this.createSearch();
+    const input = $('#searchInput')[0];
+    const options = {
+      types: ['(cities)'],
+      componentRestrictions: {
+        country: ['fr', 'ch'],
+      },
+    };
+    /* eslint-disable-next-line */
+    new google.maps.places.Autocomplete(input, options);
+    $('#searchBtn').click(() => {
+      this.research = $('#searchInput').val();
+      this.state = 1;
+    });
+    this.creatIntro();
+    this.creatFooter();
+    this.fadeIn('header');
+    this.fadeIn('main');
+    this.fadeIn('footer');
+  }
+
+  step1(research) {
+    this.fadeOut('main');
+    window.setTimeout(() => {
+      $('main').empty();
+      this.creatResult(research);
+      this.fadeIn('main');
+    }, 1000);
   }
 }
 
