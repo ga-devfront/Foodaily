@@ -303,17 +303,6 @@ class Site {
     });
   }
 
-  creatMap(research) {
-    var latLng = new google.maps.LatLng(-34.397, 150.644);
-    var myOptions = {
-      zoom: 8,
-      center: latLng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  var map = new google.maps.Map($('#map'),
-  myOptions);
-  }
-
   creatResult(research) {
     this.newHtml({
       parent: $('main'),
@@ -373,21 +362,12 @@ class Site {
     });
     this.newHtml({
       parent: $('#result section'),
-      element: 'div',
-      attr: {
-        id: 'mapContainer',
-      },
-      class: [],
-    });
-    this.newHtml({
-      parent: $('#map'),
-      element: 'div',
+      element: 'aside',
       attr: {
         id: 'map',
       },
       class: [],
     });
-    this.creatMap(research);
     this.newHtml({
       parent: $('#result section'),
       element: 'section',

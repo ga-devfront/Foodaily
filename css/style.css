@@ -79,7 +79,7 @@ form label {
     width: 1000px;
 }
 
-#mapContainer {
+#map {
     position: -webkit-sticky;
     position: sticky;
     top: 40px;
@@ -87,12 +87,6 @@ form label {
     height: 580px;
     width: 400px;
     background-color: green;
-    overflow: hidden;
-}
-
-#map {
-    height: 580px;
-    width: 400px;
 }
 
 #connection {
