@@ -305,11 +305,16 @@ class Site {
   }
 
   createMarker(place, map) {
+    const img = 'img/icon.png';
+    console.log(place);
     /* eslint-disable-next-line */
-    new google.maps.Marker({
+    const marker = new google.maps.Marker({
       map,
       position: place.geometry.location,
+      icon: img,
+      title: place.name,
     });
+    /* marker.addListener('click', ) */
   }
 
   async creatMap() {
@@ -336,9 +341,8 @@ class Site {
       const placesService = new google.maps.places.PlacesService(map);
       const request = {
         location: result,
-        radius: '500',
+        radius: '1000',
         type: ['restaurant'],
-        fields: ['name', 'formatted_address', 'geometry'],
       };
       placesService.nearbySearch(request, (results, status) => {
         /* eslint-disable-next-line */
@@ -486,6 +490,7 @@ class Site {
       new google.maps.places.Autocomplete(input, options);
       $('#searchBtn').click(() => {
         this.research = $('#searchInput').val();
+        this.restaurants = [];
         this.state = 1;
       });
       this.creatIntro();
