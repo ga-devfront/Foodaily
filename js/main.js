@@ -303,18 +303,25 @@ class Site {
     });
   }
 
-  creatMap(research) {
-    var latLng = new google.maps.LatLng(-34.397, 150.644);
-    var myOptions = {
-      zoom: 8,
-      center: latLng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  var map = new google.maps.Map($('#map'),
-  myOptions);
+  creatMap() {
+    const paris = new google.maps.LatLng(48.866667, 2.333333);
+    const map = new google.maps.Map(document.getElementById('map'), {
+      center: paris,
+      zoom: 15,
+    });
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({
+      address: this.research,
+    }, (results, status) => {
+      if (status === 'OK') {
+        map.setCenter(results[0].geometry.location);
+      } else {
+        alert(`Geocode was not successful for the following reason: ${status}`);
+      }
+    });
   }
 
-  creatResult(research) {
+  creatResult() {
     this.newHtml({
       parent: $('main'),
       element: 'aside',
@@ -329,7 +336,7 @@ class Site {
       attr: {},
       class: ['big', 'white', 'bold'],
     });
-    $('#resultName p').text(`Restaurants à ${research}`);
+    $('#resultName p').text(`Restaurants à ${this.research}`);
     this.newHtml({
       parent: $('main'),
       element: 'article',
@@ -380,14 +387,14 @@ class Site {
       class: [],
     });
     this.newHtml({
-      parent: $('#map'),
+      parent: $('#mapContainer'),
       element: 'div',
       attr: {
         id: 'map',
       },
       class: [],
     });
-    this.creatMap(research);
+    this.creatMap();
     this.newHtml({
       parent: $('#result section'),
       element: 'section',
