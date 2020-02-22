@@ -5,6 +5,7 @@ class Site {
     this.state = 0;
     this.previousState = 0;
     this.research = '';
+    this.restaurants = [];
   }
 
   set state(state) {
@@ -303,25 +304,59 @@ class Site {
     });
   }
 
-  creatMap() {
-    const paris = new google.maps.LatLng(48.866667, 2.333333);
-    const map = new google.maps.Map(document.getElementById('map'), {
-      center: paris,
-      zoom: 15,
-    });
-    const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({
-      address: this.research,
-    }, (results, status) => {
-      if (status === 'OK') {
-        map.setCenter(results[0].geometry.location);
-      } else {
-        alert(`Geocode was not successful for the following reason: ${status}`);
-      }
+  createMarker(place, map) {
+    /* eslint-disable-next-line */
+    new google.maps.Marker({
+      map,
+      position: place.geometry.location,
     });
   }
 
-  creatResult() {
+  async creatMap() {
+    /* eslint-disable-next-line */
+    return new Promise(async (resolveMap) => {
+      /* eslint-disable-next-line */
+      const geocoder = new google.maps.Geocoder();
+      const maPromesse = new Promise((resolveGeo) => {
+        geocoder.geocode({
+          address: this.research,
+        }, (results, status) => {
+          if (status === 'OK') {
+            resolveGeo(results[0].geometry.location);
+          }
+        });
+      });
+      const result = await maPromesse;
+      /* eslint-disable-next-line */
+      const map = new google.maps.Map(document.getElementById('map'), {
+        center: result,
+        zoom: 15,
+      });
+      /* eslint-disable-next-line */
+      const placesService = new google.maps.places.PlacesService(map);
+      const request = {
+        location: result,
+        radius: '500',
+        type: ['restaurant'],
+        fields: ['name', 'formatted_address', 'geometry'],
+      };
+      placesService.nearbySearch(request, (results, status) => {
+        /* eslint-disable-next-line */
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (let i = 0; i < results.length; i += 1) {
+            window.setTimeout(() => {
+              this.createMarker(results[i], map);
+            }, 100 * i);
+
+            this.restaurants.push(results[i]);
+          }
+        }
+      });
+      resolveMap();
+    });
+  }
+
+  async creatResult() {
     this.newHtml({
       parent: $('main'),
       element: 'aside',
@@ -394,7 +429,7 @@ class Site {
       },
       class: [],
     });
-    this.creatMap();
+    await this.creatMap();
     this.newHtml({
       parent: $('#result section'),
       element: 'section',
