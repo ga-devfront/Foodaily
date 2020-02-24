@@ -299,6 +299,43 @@ class Site {
     });
   }
 
+  creatRate(settings) {
+    const rateOn100 = settings.restaurant.rating * 20;
+    this.newHtml({
+      parent: $(settings.parent),
+      element: 'aside',
+      attr: {},
+      class: ['container', 'center', 'verticalCenter', 'rate'],
+    });
+    this.newHtml({
+      parent: $(`${settings.parent} aside`),
+      element: 'div',
+      attr: {},
+      class: ['rateBackground'],
+    });
+    $(`${settings.parent} aside div`).css('height', (rateOn100 * 75) / 100);
+    if (rateOn100 < 25) {
+      $(`${settings.parent} aside div`).css('background-color', '#db0000');
+    } else if (rateOn100 >= 25 && rateOn100 < 50) {
+      $(`${settings.parent} aside div`).css('background-color', '#db7c00');
+    } else if (rateOn100 >= 50 && rateOn100 < 75) {
+      $(`${settings.parent} aside div`).css('background-color', '#dbc900');
+    } else if (rateOn100 >= 75) {
+      $(`${settings.parent} aside div`).css('background-color', '#0adb00');
+    }
+    this.newHtml({
+      parent: $(`${settings.parent} aside`),
+      element: 'p',
+      attr: {},
+      class: ['bold'],
+    });
+    $(`${settings.parent} aside p`).text(`${settings.restaurant.rating}/5`);
+
+    window.setTimeout(() => {
+
+    }, 100);
+  }
+
   creatRestaurant(settings) {
     const restaurant = this.restaurants[settings.number];
     if ($(`#${restaurant.id}`).length === 0) {
@@ -341,9 +378,13 @@ class Site {
         parent: $(`#${restaurant.id}`),
         element: 'article',
         attr: {},
-        class: ['white', 'description'],
+        class: ['description'],
       });
       $(`#${restaurant.id} article`).append($(`<h3>${restaurant.name}</h3>`));
+      this.creatRate({
+        parent: `#${restaurant.id} article`,
+        restaurant,
+      });
     }
   }
 
