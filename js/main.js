@@ -1,10 +1,15 @@
 /* eslint-disable no-new */
+import customMap from './customMap.js';
+
 class Site {
   constructor(container) {
     this.parent = container;
     this.state = 0;
     this.previousState = 0;
     this.research = '';
+    this.researchPos = null;
+    this.restaurants = [];
+    this.map = null;
   }
 
   set state(state) {
@@ -52,7 +57,7 @@ class Site {
       parent: $('header'),
       element: 'a',
       attr: {
-        href: '/foodaily',
+        href: '/openclassrooms/foodaily',
       },
       class: [],
     });
@@ -295,26 +300,141 @@ class Site {
   }
 
   creatRestaurant(settings) {
-    this.newHtml({
-      parent: settings.parent,
-      element: 'element',
-      attr: {},
-      class: ['container', 'around', 'littleRestaurant'],
+    const restaurant = this.restaurants[settings.number];
+    if ($(`#${restaurant.id}`).length === 0) {
+      this.newHtml({
+        parent: settings.parent,
+        element: 'element',
+        attr: {
+          id: restaurant.id,
+        },
+        class: ['container', 'between', 'littleRestaurant'],
+      });
+      this.newHtml({
+        parent: $(`#${restaurant.id}`),
+        element: 'div',
+        attr: {},
+        class: ['container', 'containerImg'],
+      });
+
+      if (restaurant.photos !== undefined) {
+        this.newHtml({
+          parent: $(`#${restaurant.id} .containerImg`),
+          element: 'img',
+          attr: {
+            src: restaurant.photos[0].getUrl,
+          },
+          class: [],
+        });
+      } else {
+        this.newHtml({
+          parent: $(`#${restaurant.id} .containerImg`),
+          element: 'img',
+          attr: {
+            src: 'img/noPicture.jpg',
+          },
+          class: [],
+        });
+      }
+
+      this.newHtml({
+        parent: $(`#${restaurant.id}`),
+        element: 'article',
+        attr: {},
+        class: ['white', 'description'],
+      });
+      $(`#${restaurant.id} article`).append($(`<h3>${restaurant.name}</h3>`));
+    }
+  }
+
+  createMarker(place) {
+    const img = 'img/icon.png';
+    /* eslint-disable-next-line */
+    let marker = new google.maps.Marker({
+      map: this.map,
+      position: place.geometry.location,
+      icon: img,
+      title: place.name,
+    });
+    const card = $(`#${place.id}`);
+    $(card).hover(() => {
+      /* eslint-disable-next-line */
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+    },
+    () => {
+      marker.setAnimation(null);
+    });
+    marker.addListener('click', () => {
+      $('html, body').stop().animate({
+        scrollTop: $(`#${place.id}`).offset().top - 200,
+      }, 'slow');
     });
   }
 
-  creatMap(research) {
-    var latLng = new google.maps.LatLng(-34.397, 150.644);
-    var myOptions = {
-      zoom: 8,
-      center: latLng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  var map = new google.maps.Map($('#map'),
-  myOptions);
+  buildRestaurants() {
+    for (let i = 0; i < this.restaurants.length; i += 1) {
+      window.setTimeout(() => {
+        this.creatRestaurant({
+          parent: $('#resultList'),
+          number: i,
+        });
+        this.createMarker(this.restaurants[i], this.map);
+      }, 100 * i);
+    }
   }
 
-  creatResult(research) {
+  async getCityPos() {
+    /* eslint-disable-next-line */
+    const geocoder = new google.maps.Geocoder();
+    const cityPos = new Promise((resolveGeo) => {
+      geocoder.geocode({
+        address: this.research,
+      }, (results, status) => {
+        if (status === 'OK') {
+          resolveGeo(results[0].geometry.location);
+        }
+      });
+    });
+    return cityPos;
+  }
+
+  async getPlaces(location) {
+    /* eslint-disable-next-line */
+    const placesService = new google.maps.places.PlacesService(this.map);
+    const request = {
+      location,
+      radius: '1000',
+      type: ['restaurant'],
+    };
+    /* eslint-disable-next-line */
+    const places = new Promise(async (resolveMap) => {
+      placesService.nearbySearch(request, (results, status, pagination) => {
+        /* eslint-disable-next-line */
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          this.restaurants.push(...results);
+          this.buildRestaurants();
+          /* buildRestaurantCard */
+          pagination.nextPage();
+        }
+        if (!pagination.hasNextPage) {
+          resolveMap();
+        }
+      });
+    });
+    return places;
+  }
+
+  async creatMap() {
+    this.researchPos = await this.getCityPos();
+    /* eslint-disable-next-line */
+    this.map = new google.maps.Map(document.getElementById('map'), {
+      center: this.researchPos,
+      zoom: 15,
+      styles: customMap,
+    });
+  }
+
+  async creatResult() {
     this.newHtml({
       parent: $('main'),
       element: 'aside',
@@ -329,7 +449,7 @@ class Site {
       attr: {},
       class: ['big', 'white', 'bold'],
     });
-    $('#resultName p').text(`Restaurants à ${research}`);
+    $('#resultName p').text(`Restaurants à ${this.research}`);
     this.newHtml({
       parent: $('main'),
       element: 'article',
@@ -364,7 +484,6 @@ class Site {
       },
       class: ['bold'],
     });
-    $('#resultNumber').text('255 Restaurants');
     this.newHtml({
       parent: $('#result'),
       element: 'section',
@@ -380,14 +499,13 @@ class Site {
       class: [],
     });
     this.newHtml({
-      parent: $('#map'),
+      parent: $('#mapContainer'),
       element: 'div',
       attr: {
         id: 'map',
       },
       class: [],
     });
-    this.creatMap(research);
     this.newHtml({
       parent: $('#result section'),
       element: 'section',
@@ -396,12 +514,9 @@ class Site {
       },
       class: ['container', 'column', 'center'],
     });
-    for (let x = 0; x < 10; x += 1) {
-      this.creatRestaurant({
-        parent: $('#resultList'),
-        name: `restaurant ${x}`,
-      });
-    }
+    await this.creatMap();
+    await this.getPlaces(this.researchPos);
+    $('#resultNumber').text(`${this.restaurants.length} Restaurants`);
   }
 
   fadeIn(element) {
@@ -444,6 +559,7 @@ class Site {
       new google.maps.places.Autocomplete(input, options);
       $('#searchBtn').click(() => {
         this.research = $('#searchInput').val();
+        this.restaurants = [];
         this.state = 1;
       });
       this.creatIntro();

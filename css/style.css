@@ -86,7 +86,7 @@ form label {
     border-radius: 25px;
     height: 580px;
     width: 400px;
-    background-color: green;
+    background-color: #0067c0;
     overflow: hidden;
 }
 
@@ -292,9 +292,25 @@ form label {
 .littleRestaurant {
     width: 500px;
     height: 130px;
-    background-color: green;
+    background-color: #0067c0;
     border-radius: 25px;
     margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.littleRestaurant .containerImg {
+    width: 160px;
+    height: 130px;
+    overflow: hidden;
+}
+
+.containerImg img {
+        max-width:100%;
+        height:auto;
+}
+
+.littleRestaurant .description {
+    width: 310px;
 }
 
 /* media queries */
